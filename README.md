@@ -1,6 +1,6 @@
 # **React Front End** [WIP]
 
-This directory houses the front end React application, which is currently WIP, for the `golang-journey` project.
+This directory houses the front end React application, which is [LIVE](https://nervous-lamarr-156506.netlify.app/) but still WIP, for the `golang-journey` project.
 
 It currently can interact with the back end (written in Go and WIP) to fetch and persist data in a database.
 
