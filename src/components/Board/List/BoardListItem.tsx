@@ -15,8 +15,7 @@ interface BoardListItemProps {
 }
 
 export const BoardListItem: FC<BoardListItemProps> = ({ task }) => {
-  const [text, _] = useState<string>(task.text);
-  const [draftText, setDraftText] = useState<string>(text);
+  const [draftText, setDraftText] = useState<string>(task.text);
   const [mode, setMode] = useState<string>('read');
 
   useEffect(() => {
@@ -59,14 +58,14 @@ export const BoardListItem: FC<BoardListItemProps> = ({ task }) => {
   };
 
   const handleCancel = () => {
-    setDraftText(text);
+    setDraftText(task.text);
     setMode('read');
   };
 
   return (
     <div data-testid="board-list-item" onClick={handleClick}>
       {mode === 'read' ? (
-        <h3>{text}</h3>
+        <h3>{task.text}</h3>
       ) : (
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="ControlTextarea">
