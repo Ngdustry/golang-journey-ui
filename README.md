@@ -1,4 +1,4 @@
-# **Journey** [WIP]
+# **Journey UI** [WIP]
 
 ![](https://media0.giphy.com/media/Wrlwh4k4Uz1o3imeZg/giphy.gif?cid=ecf05e47q4laqyya9bxosyzlox6c6zb804zvtvx505hlup4x&rid=giphy.gif)
 
