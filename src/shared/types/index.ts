@@ -15,3 +15,13 @@ export interface NewTask {
   status: string;
   user: User;
 }
+
+export interface TaskToUpdate {
+  id: string;
+  status: string;
+  text: string;
+}
+
+export const ItemTypes = {
+  CARD: 'card'
+};
