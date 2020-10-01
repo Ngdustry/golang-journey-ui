@@ -5,6 +5,12 @@ import { Task } from 'shared/types';
 
 import { BoardList } from 'components/Board/List/BoardList';
 
+const titles = [
+  { title: 'To Do', status: 'inactive' },
+  { title: 'In Progress', status: 'active' },
+  { title: 'Completed', status: 'completed' }
+];
+
 export const AppBoard: FC<unknown> = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
 
@@ -16,12 +22,6 @@ export const AppBoard: FC<unknown> = () => {
 
     fetchData();
   }, []);
-
-  const titles = [
-    { title: 'To Do', status: 'inactive' },
-    { title: 'In Progress', status: 'active' },
-    { title: 'Completed', status: 'completed' }
-  ];
 
   return (
     <div data-testid="app-board" className="app-board">
