@@ -1,4 +1,4 @@
-import { NewTask } from '../types';
+import { NewTask, TaskToUpdate } from '../types';
 
 const URL = process.env.REACT_APP_SERVER_URL;
 
@@ -29,11 +29,13 @@ export const createTask = async (task: NewTask): Promise<any> => {
   }
 };
 
-export const updateTask = async (id: string, text: string): Promise<any> => {
+export const updateTask = async (item: TaskToUpdate): Promise<any> => {
+  const { id, text, status } = item;
   const res = await fetch(`${URL}/${id}`, {
     method: 'PUT',
     body: JSON.stringify({
-      text
+      text,
+      status
     })
   });
 
