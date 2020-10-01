@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Container, Row, Col } from 'shared/lib/';
+import { Container, Row, Col } from 'shared/libs';
 import { fetchTasks } from 'shared/utils/Http';
 import { Task } from 'shared/types';
 

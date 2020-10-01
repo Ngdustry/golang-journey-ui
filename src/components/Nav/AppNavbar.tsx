@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Image, Navbar, Nav } from 'shared/lib';
+import { Image, Navbar, Nav } from 'shared/libs';
 import { fetchHandler } from 'shared/utils/Http';
 
 export const AppNavbar: FC<unknown> = () => {
