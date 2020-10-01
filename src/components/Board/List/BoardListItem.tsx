@@ -6,9 +6,10 @@ import {
   Dropdown,
   DropdownButton,
   Form
-} from 'shared/lib';
+} from 'shared/libs';
 import { createTask, deleteTask, updateTask } from 'shared/utils/Http';
 import { Task } from 'shared/types';
+import { DragWrapper } from 'components/Dnd/DragWrapper';
 
 interface BoardListItemProps {
   task: Task;
@@ -49,7 +50,11 @@ export const BoardListItem: FC<BoardListItemProps> = ({ task }) => {
     if (!task.id) {
       createTask(data);
     } else {
-      updateTask(task.id, draftText);
+      updateTask({
+        id: task.id,
+        text: draftText,
+        status: task.status
+      });
     }
   };
 
@@ -63,58 +68,49 @@ export const BoardListItem: FC<BoardListItemProps> = ({ task }) => {
   };
 
   return (
-    <div data-testid="board-list-item" onClick={handleClick}>
-      {mode === 'read' ? (
-        <h3>{task.text}</h3>
-      ) : (
-        <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="ControlTextarea">
-            <Form.Control
-              onChange={handleChange}
-              as="textarea"
-              rows={3}
-              value={draftText}
-            />
-          </Form.Group>
-          <div className="text-right">
-            <ButtonGroup aria-label="options">
-              {task.id && (
+    <DragWrapper task={task}>
+      <div data-testid="board-list-item" onClick={handleClick}>
+        {mode === 'read' ? (
+          <h3>{task.text}</h3>
+        ) : (
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="ControlTextarea">
+              <Form.Control
+                onChange={handleChange}
+                as="textarea"
+                rows={3}
+                value={draftText}
+              />
+            </Form.Group>
+            <div className="text-right">
+              <ButtonGroup aria-label="options">
                 <DropdownButton
-                  id="dropdown-status"
-                  title="Status"
-                  variant="info"
+                  className="mx-1"
+                  id="dropdown-actions"
+                  title="Actions"
                 >
-                  <Dropdown.Item href="#">To Do</Dropdown.Item>
-                  <Dropdown.Item href="#">In Progress</Dropdown.Item>
-                  <Dropdown.Item href="#">Completed</Dropdown.Item>
-                </DropdownButton>
-              )}
-              <DropdownButton
-                className="mx-1"
-                id="dropdown-actions"
-                title="Actions"
-              >
-                <Dropdown.Item
-                  as="button"
-                  type="submit"
-                  disabled={!draftText}
-                  href="#"
-                >
-                  {task.id ? 'Update' : 'Create'}
-                </Dropdown.Item>
-                {task.id && (
-                  <Dropdown.Item href="#" onClick={handleDelete}>
-                    Delete
+                  <Dropdown.Item
+                    as="button"
+                    type="submit"
+                    disabled={!draftText}
+                    href="#"
+                  >
+                    {task.id ? 'Update' : 'Create'}
                   </Dropdown.Item>
-                )}
-              </DropdownButton>
-              <Button variant="secondary" onClick={handleCancel}>
-                Cancel
-              </Button>
-            </ButtonGroup>
-          </div>
-        </Form>
-      )}
-    </div>
+                  {task.id && (
+                    <Dropdown.Item href="#" onClick={handleDelete}>
+                      Delete
+                    </Dropdown.Item>
+                  )}
+                </DropdownButton>
+                <Button variant="secondary" onClick={handleCancel}>
+                  Cancel
+                </Button>
+              </ButtonGroup>
+            </div>
+          </Form>
+        )}
+      </div>
+    </DragWrapper>
   );
 };
