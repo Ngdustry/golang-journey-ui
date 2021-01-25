@@ -10,7 +10,9 @@ export interface Task {
   user: User;
 }
 
-export interface NewTask {
+export interface Draft {
+  draft: boolean;
+  id: number;
   text: string;
   status: string;
   user: User;
@@ -20,6 +22,12 @@ export interface TaskToUpdate {
   id: string;
   status: string;
   text: string;
+}
+
+export interface TaskToCreate {
+  text: string;
+  status: string;
+  user: User;
 }
 
 export const ItemTypes = {
