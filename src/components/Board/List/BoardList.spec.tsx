@@ -6,7 +6,9 @@ import { BoardList } from './BoardList';
 
 describe('BoardList', () => {
   it('should render', () => {
-    const { getByTestId } = render(<BoardList tasks={tasks()} title="To Do" />);
+    const { getByTestId } = render(
+      <BoardList tasks={tasks()} title="To Do" status="active" />
+    );
     expect(getByTestId('board-list')).toBeInTheDocument();
   });
 });
