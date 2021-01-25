@@ -1,4 +1,4 @@
-import { NewTask, TaskToUpdate } from '../types';
+import { TaskToCreate, TaskToUpdate } from '../types';
 
 const URL = process.env.REACT_APP_SERVER_URL;
 
@@ -17,7 +17,7 @@ export const fetchTasks = async (id?: string): Promise<any> => {
   return data;
 };
 
-export const createTask = async (task: NewTask): Promise<any> => {
+export const createTask = async (task: TaskToCreate): Promise<any> => {
   const res = await fetch(`${URL}`, {
     method: 'POST',
     body: JSON.stringify(task)
