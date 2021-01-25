@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from 'react';
-
+import React, { FC, useState } from 'react';
+import { Task } from 'shared/types';
 import {
   Button,
   ButtonGroup,
@@ -7,64 +7,44 @@ import {
   DropdownButton,
   Form
 } from 'shared/libs';
-import { createTask, deleteTask, updateTask } from 'shared/utils/Http';
-import { Task } from 'shared/types';
+import { deleteTask, updateTask } from 'shared/utils/Http';
+
 import { DragWrapper } from 'components/Dnd/DragWrapper';
 
-interface BoardListItemProps {
+interface BoardListTaskItemProps {
   task: Task;
 }
 
-export const BoardListItem: FC<BoardListItemProps> = ({ task }) => {
+export const BoardListTaskItem: FC<BoardListTaskItemProps> = ({ task }) => {
   const [draftText, setDraftText] = useState<string>(task.text);
   const [mode, setMode] = useState<string>('read');
 
-  useEffect(() => {
-    if (!task.text) {
-      setMode('write');
-    }
-  }, [task]);
+  const handleDelete = (): void => {
+    deleteTask(task.id);
+  };
 
-  const handleClick = () => {
+  const handleCancel = (): void => {
+    setMode('read');
+  };
+
+  const handleClick = (): void => {
     if (mode === 'write') return;
 
     setMode('write');
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
     const { value } = e.target;
     setDraftText(value);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const data = {
+    updateTask({
+      id: task.id,
       text: draftText,
-      status: task.status,
-      user: {
-        id: 'abc123',
-        firstName: 'John'
-      }
-    };
-
-    if (!task.id) {
-      createTask(data);
-    } else {
-      updateTask({
-        id: task.id,
-        text: draftText,
-        status: task.status
-      });
-    }
-  };
-
-  const handleDelete = () => {
-    deleteTask(task.id);
-  };
-
-  const handleCancel = () => {
-    setDraftText(task.text);
-    setMode('read');
+      status: task.status
+    });
   };
 
   return (
