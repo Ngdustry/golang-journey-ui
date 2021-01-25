@@ -1,10 +1,12 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import { Card, ListGroup, BsFillPlusCircleFill } from 'shared/libs';
-import { Task } from 'shared/types';
-
+import { Draft, Task } from 'shared/types';
 import { DropWrapper } from 'components/Dnd/DropWrapper';
-import { BoardListItem } from 'components/Board/List/BoardListItem';
+import {
+  BoardListDraftItem,
+  BoardListTaskItem
+} from 'components/Board/List/Item';
 
 interface BoardListProps {
   title: string;
@@ -13,15 +15,12 @@ interface BoardListProps {
 }
 
 export const BoardList: FC<BoardListProps> = ({ title, tasks, status }) => {
-  const [list, setList] = useState(tasks);
+  const [draftList, setDraftList] = useState<Draft[]>([]);
 
-  useEffect(() => {
-    setList(tasks);
-  }, [tasks]);
-
-  const handleAddTask = () => {
+  const handleAddDraft = (): void => {
     const draft = {
-      id: '',
+      draft: true,
+      id: draftList.length,
       text: '',
       status,
       user: {
@@ -30,7 +29,11 @@ export const BoardList: FC<BoardListProps> = ({ title, tasks, status }) => {
       }
     };
 
-    setList([draft, ...list]);
+    setDraftList([...draftList, draft]);
+  };
+
+  const handleCancelDraft = (target: Draft): void => {
+    setDraftList(draftList.filter(draft => draft.id !== target.id));
   };
 
   return (
@@ -41,15 +44,23 @@ export const BoardList: FC<BoardListProps> = ({ title, tasks, status }) => {
             {title}
             <BsFillPlusCircleFill
               className="add-task-icon"
-              onClick={handleAddTask}
+              onClick={handleAddDraft}
             />
           </div>
         </Card.Header>
         <Card.Body>
           <ListGroup>
-            {list.map(task => (
+            {tasks.map(task => (
               <ListGroup.Item key={task.id} className="board-list-item">
-                <BoardListItem task={task} />
+                <BoardListTaskItem task={task} />
+              </ListGroup.Item>
+            ))}
+            {draftList.map(draft => (
+              <ListGroup.Item key={draft.id} className="board-list-item">
+                <BoardListDraftItem
+                  draft={draft}
+                  handleCancelDraft={handleCancelDraft}
+                />
               </ListGroup.Item>
             ))}
           </ListGroup>
