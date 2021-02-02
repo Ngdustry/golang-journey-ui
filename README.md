@@ -2,17 +2,21 @@
 
 ![](https://media0.giphy.com/media/Wrlwh4k4Uz1o3imeZg/giphy.gif?cid=ecf05e47q4laqyya9bxosyzlox6c6zb804zvtvx505hlup4x&rid=giphy.gif)
 
-This repo houses the WIP front end React application for the `Journey` project; a full stack 'To Do' app using `React` with `Typescript` and `Go`.
+This repo houses the WIP front end React application for the `Journey` project; a full stack task management app using `React` with `Typescript` and `Go`.
 
 It interacts with the [back end](https://github.com/Ngdustry/golang-journey-api) to fetch and persist data in a `PostregreSQL` database.
-
-This project is currently `deployed` on [Netlify](https://nervous-lamarr-156506.netlify.app/).
 
 ---
 
 ## Local Environment
 
-From the project root, you can run locally:
+To install dependencies:
+
+```
+yarn install
+```
+
+To start local environment:
 
 ```
 yarn start
