@@ -10,6 +10,13 @@ export const task = {
   user
 };
 
+export const draft = {
+  draft: true,
+  id: 1,
+  text: 'Hello World!',
+  status: 'active'
+};
+
 export const tasks = (total?: number) => {
   const _total = total || 4;
 
