@@ -15,7 +15,6 @@ export interface Draft {
   id: number;
   text: string;
   status: string;
-  user: User;
 }
 
 export interface TaskToUpdate {
@@ -27,7 +26,7 @@ export interface TaskToUpdate {
 export interface TaskToCreate {
   text: string;
   status: string;
-  user: User;
+  userID: string;
 }
 
 export const ItemTypes = {
