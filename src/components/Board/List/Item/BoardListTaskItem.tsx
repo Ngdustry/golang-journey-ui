@@ -49,7 +49,7 @@ export const BoardListTaskItem: FC<BoardListTaskItemProps> = ({ task }) => {
 
   return (
     <DragWrapper task={task}>
-      <div data-testid="board-list-item" onClick={handleClick}>
+      <div data-testid="board-list-task-item" onClick={handleClick}>
         {mode === 'read' ? (
           <h3>{task.text}</h3>
         ) : (

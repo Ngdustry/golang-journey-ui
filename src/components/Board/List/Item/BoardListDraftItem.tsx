@@ -37,10 +37,7 @@ export const BoardListDraftItem: FC<BoardListDraftItemProps> = ({
     const data = {
       text: draftText,
       status: draft.status,
-      user: {
-        id: 'abc123',
-        firstName: 'John'
-      }
+      userID: 'abc123'
     };
 
     createTask(data);
@@ -48,7 +45,7 @@ export const BoardListDraftItem: FC<BoardListDraftItemProps> = ({
 
   return (
     <DragWrapper task={draft}>
-      <div data-testid="board-list-item" onClick={handleClick}>
+      <div data-testid="board-list-draft-item" onClick={handleClick}>
         {mode === 'read' ? (
           <h3>{draft.text}</h3>
         ) : (
