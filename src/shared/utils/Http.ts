@@ -1,6 +1,6 @@
 import { TaskToCreate, TaskToUpdate } from 'shared/types';
 
-const URL = process.env.REACT_APP_SERVER_URL + '/tasks';
+const URL = process.env.REACT_APP_SERVER_URL;
 
 export const fetchHandler = async (_url: string) => {
   const res = await fetch(_url);
@@ -10,16 +10,30 @@ export const fetchHandler = async (_url: string) => {
 };
 
 export const fetchTasks = async (id?: string): Promise<any> => {
-  const _URL = id ? `${URL}/${id}` : URL;
-  const res = await fetch(`${_URL}`);
+  const _URL = id ? `${URL}/tasks/${id}` : `${URL}/tasks`;
+  const token = localStorage.getItem('google');
+  if (!token) return;
+
+  const res = await fetch(`${_URL}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
   const data = await res.json();
 
   return data;
 };
 
 export const createTask = async (task: TaskToCreate): Promise<any> => {
-  const res = await fetch(`${URL}`, {
+  const token = localStorage.getItem('google');
+  if (!token) return;
+
+  const res = await fetch(`${URL}/tasks/create`, {
     method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
     body: JSON.stringify(task)
   });
 
@@ -30,10 +44,16 @@ export const createTask = async (task: TaskToCreate): Promise<any> => {
 };
 
 export const updateTask = async (item: TaskToUpdate): Promise<any> => {
+  const token = localStorage.getItem('google');
+  if (!token) return;
+
   const { id, text, status } = item;
-  const res = await fetch(`${URL}/update/${id}`, {
+
+  const res = await fetch(`${URL}/tasks/update/${id}`, {
     method: 'PUT',
-    mode: 'cors',
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
     body: JSON.stringify({
       text,
       status
@@ -47,9 +67,14 @@ export const updateTask = async (item: TaskToUpdate): Promise<any> => {
 };
 
 export const deleteTask = async (id: string): Promise<any> => {
-  const res = await fetch(`${URL}/delete/${id}`, {
+  const token = localStorage.getItem('google');
+  if (!token) return;
+
+  const res = await fetch(`${URL}/tasks/delete/${id}`, {
     method: 'DELETE',
-    mode: 'cors'
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
   });
 
   if (res.status === 200) {
