@@ -1,13 +1,8 @@
-export interface User {
-  id: string;
-  firstName: string;
-}
-
 export interface Task {
   id: string;
   text: string;
   status: string;
-  user: User;
+  user: string;
 }
 
 export interface Draft {
