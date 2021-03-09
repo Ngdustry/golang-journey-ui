@@ -1,6 +1,6 @@
 import { TaskToCreate, TaskToUpdate } from 'shared/types';
 
-const URL = process.env.REACT_APP_SERVER_URL;
+const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 export const fetchHandler = async (_url: string) => {
   const res = await fetch(_url);
@@ -10,7 +10,7 @@ export const fetchHandler = async (_url: string) => {
 };
 
 export const fetchTasks = async (id?: string): Promise<any> => {
-  const _URL = id ? `${URL}/tasks/${id}` : `${URL}/tasks`;
+  const _URL = id ? `${BASE_URL}/tasks/${id}` : `${URL}/tasks`;
   const token = localStorage.getItem('google');
   if (!token) return;
 
@@ -29,7 +29,7 @@ export const createTask = async (task: TaskToCreate): Promise<any> => {
   const token = localStorage.getItem('google');
   if (!token) return;
 
-  const res = await fetch(`${URL}/tasks/create`, {
+  const res = await fetch(`${BASE_URL}/tasks/create`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`
@@ -49,7 +49,7 @@ export const updateTask = async (item: TaskToUpdate): Promise<any> => {
 
   const { id, text, status } = item;
 
-  const res = await fetch(`${URL}/tasks/update/${id}`, {
+  const res = await fetch(`${BASE_URL}/tasks/update/${id}`, {
     method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`
@@ -70,7 +70,7 @@ export const deleteTask = async (id: string): Promise<any> => {
   const token = localStorage.getItem('google');
   if (!token) return;
 
-  const res = await fetch(`${URL}/tasks/delete/${id}`, {
+  const res = await fetch(`${BASE_URL}/tasks/delete/${id}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`
