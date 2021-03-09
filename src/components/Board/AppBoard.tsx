@@ -22,6 +22,11 @@ export const AppBoard: FC<unknown> = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchTasks();
+      if (!data) {
+        history.push('/error');
+        return;
+      }
+
       setTasks(data);
       setLoading(false);
     };
