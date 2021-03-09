@@ -101,3 +101,53 @@
   bottom: 4rem;
   right: 9rem;
 }
+
+#error-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#error-text {
+  color: white;
+  margin: 0 2rem;
+}
+
+#error-graphic {
+  width: 35%;
+}
+
+.nav-profile-image {
+  width: 3rem;
+  height: 3rem;
+}
+
+@media only screen and (max-width: 1366px) {
+  #error-container {
+    flex-direction: column;
+  }
+
+  #error-graphic {
+    width: 50%;
+    margin-right: 0;
+    margin-bottom: 2rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #login-window-container {
+    width: 100%;
+  }
+
+  .login-graphic-container {
+    display: none;
+  }
+
+  #login-graphic-1,
+  #login-graphic-2 {
+    display: none;
+  }
+}

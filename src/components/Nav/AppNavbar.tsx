@@ -42,12 +42,16 @@ export const AppNavbar: FC<unknown> = () => {
             Journey
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Collapse className="responsive-navbar-nav">
             <Nav className="ml-auto">
-              <Nav.Link className="text-light" onClick={handleLogout}>
+              <Nav.Link className=" mx-auto text-light" onClick={handleLogout}>
                 Log Out
               </Nav.Link>
-              <Image src={img} roundedCircle />
+              <Image
+                className="mx-auto nav-profile-image"
+                src={img}
+                roundedCircle
+              />
             </Nav>
           </Navbar.Collapse>
         </Navbar>
