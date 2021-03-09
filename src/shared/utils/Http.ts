@@ -1,4 +1,4 @@
-import { TaskToCreate, TaskToUpdate } from 'shared/types';
+import { TaskToCreate, TaskToUpdate, Task } from 'shared/types';
 
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -9,7 +9,7 @@ export const fetchHandler = async (_url: string) => {
   return data;
 };
 
-export const fetchTasks = async (id?: string): Promise<any> => {
+export const fetchTasks = async (id?: string): Promise<Task[] | void> => {
   const _URL = id ? `${BASE_URL}/tasks/${id}` : `${URL}/tasks`;
   const token = localStorage.getItem('google');
   if (!token) return;
@@ -25,7 +25,9 @@ export const fetchTasks = async (id?: string): Promise<any> => {
   return data;
 };
 
-export const createTask = async (task: TaskToCreate): Promise<any> => {
+export const createTask = async (
+  task: TaskToCreate
+): Promise<string | void> => {
   const token = localStorage.getItem('google');
   if (!token) return;
 
@@ -43,7 +45,7 @@ export const createTask = async (task: TaskToCreate): Promise<any> => {
   }
 };
 
-export const updateTask = async (item: TaskToUpdate): Promise<any> => {
+export const updateTask = async (item: TaskToUpdate): Promise<void> => {
   const token = localStorage.getItem('google');
   if (!token) return;
 
@@ -66,7 +68,7 @@ export const updateTask = async (item: TaskToUpdate): Promise<any> => {
   }
 };
 
-export const deleteTask = async (id: string): Promise<any> => {
+export const deleteTask = async (id: string): Promise<void> => {
   const token = localStorage.getItem('google');
   if (!token) return;
 
