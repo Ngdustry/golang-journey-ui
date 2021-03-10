@@ -24,6 +24,11 @@ const Login: FC<unknown> = () => {
   const responseGoogle = (response: any) => {
     const { id_token: token } = response?.tokenObj;
 
+    if (!token) {
+      history.push('/error');
+      return;
+    }
+
     localStorage.setItem('google', token);
     history.push('/');
   };
