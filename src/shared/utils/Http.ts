@@ -10,7 +10,7 @@ export const fetchHandler = async (_url: string) => {
 };
 
 export const fetchTasks = async (id?: string): Promise<Task[] | void> => {
-  const _URL = id ? `${BASE_URL}/tasks/${id}` : `${URL}/tasks`;
+  const _URL = id ? `${BASE_URL}/tasks/${id}` : `${BASE_URL}/tasks`;
   const token = localStorage.getItem('google');
   if (!token) return;
 
